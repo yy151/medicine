@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yubin.dao.DrugDao" >
+    <resultMap id="BaseResultMap" type="com.yubin.model.Drug" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+        <result column="fcount" property="fcount" jdbcType="INTEGER" />
+        <result column="rcount" property="rcount" jdbcType="INTEGER" />
+        <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="tag" property="tag" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="number" property="number" jdbcType="VARCHAR" />
+        <result column="factory" property="factory" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, img, message, count, fcount, rcount, keywords, description, price, tag, 
+        type, number, factory, code
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_drug
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.yubin.model.Drug" >
+        insert into t_drug (id, name, img, 
+            message, count, fcount, 
+            rcount, keywords, description, 
+            price, tag, type, 
+            number, factory, code
+            )
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+            #{message,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{fcount,jdbcType=INTEGER}, 
+            #{rcount,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+            #{price,jdbcType=DOUBLE}, #{tag,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+            #{number,jdbcType=VARCHAR}, #{factory,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yubin.model.Drug" >
+        update t_drug
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null" >
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null" >
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="fcount != null" >
+                fcount = #{fcount,jdbcType=INTEGER},
+            </if>
+            <if test="rcount != null" >
+                rcount = #{rcount,jdbcType=INTEGER},
+            </if>
+            <if test="keywords != null" >
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="tag != null" >
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="factory != null" >
+                factory = #{factory,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_drug
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

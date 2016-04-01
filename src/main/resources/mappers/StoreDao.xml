@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yubin.dao.StoreDao" >
+    <resultMap id="BaseResultMap" type="com.yubin.model.Store" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="area" property="area" jdbcType="BIGINT" />
+        <result column="x" property="x" jdbcType="DOUBLE" />
+        <result column="y" property="y" jdbcType="DOUBLE" />
+        <result column="tel" property="tel" jdbcType="VARCHAR" />
+        <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="number" property="number" jdbcType="VARCHAR" />
+        <result column="legal" property="legal" jdbcType="VARCHAR" />
+        <result column="charge" property="charge" jdbcType="VARCHAR" />
+        <result column="leader" property="leader" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="business" property="business" jdbcType="VARCHAR" />
+        <result column="waddress" property="waddress" jdbcType="VARCHAR" />
+        <result column="supervise" property="supervise" jdbcType="BIGINT" />
+        <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="BIGINT" />
+        <result column="rcount" property="rcount" jdbcType="BIGINT" />
+        <result column="fcount" property="fcount" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, img, address, area, x, y, tel, zipcode, url, number, legal, charge, leader, 
+        type, business, waddress, supervise, createdate, message, count, rcount, fcount
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_store
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.yubin.model.Store" >
+        insert into t_store (id, name, img, 
+            address, area, x, y, 
+            tel, zipcode, url, 
+            number, legal, charge, 
+            leader, type, business, 
+            waddress, supervise, createdate, 
+            message, count, rcount, 
+            fcount)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+            #{address,jdbcType=VARCHAR}, #{area,jdbcType=BIGINT}, #{x,jdbcType=DOUBLE}, #{y,jdbcType=DOUBLE}, 
+            #{tel,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+            #{number,jdbcType=VARCHAR}, #{legal,jdbcType=VARCHAR}, #{charge,jdbcType=VARCHAR}, 
+            #{leader,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{business,jdbcType=VARCHAR}, 
+            #{waddress,jdbcType=VARCHAR}, #{supervise,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP}, 
+            #{message,jdbcType=VARCHAR}, #{count,jdbcType=BIGINT}, #{rcount,jdbcType=BIGINT}, 
+            #{fcount,jdbcType=BIGINT})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yubin.model.Store" >
+        update t_store
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null" >
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null" >
+                area = #{area,jdbcType=BIGINT},
+            </if>
+            <if test="x != null" >
+                x = #{x,jdbcType=DOUBLE},
+            </if>
+            <if test="y != null" >
+                y = #{y,jdbcType=DOUBLE},
+            </if>
+            <if test="tel != null" >
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="zipcode != null" >
+                zipcode = #{zipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="legal != null" >
+                legal = #{legal,jdbcType=VARCHAR},
+            </if>
+            <if test="charge != null" >
+                charge = #{charge,jdbcType=VARCHAR},
+            </if>
+            <if test="leader != null" >
+                leader = #{leader,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="business != null" >
+                business = #{business,jdbcType=VARCHAR},
+            </if>
+            <if test="waddress != null" >
+                waddress = #{waddress,jdbcType=VARCHAR},
+            </if>
+            <if test="supervise != null" >
+                supervise = #{supervise,jdbcType=BIGINT},
+            </if>
+            <if test="createdate != null" >
+                createdate = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null" >
+                count = #{count,jdbcType=BIGINT},
+            </if>
+            <if test="rcount != null" >
+                rcount = #{rcount,jdbcType=BIGINT},
+            </if>
+            <if test="fcount != null" >
+                fcount = #{fcount,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_store
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

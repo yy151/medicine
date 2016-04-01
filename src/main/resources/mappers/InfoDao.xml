@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yubin.dao.InfoDao" >
+    <resultMap id="BaseResultMap" type="com.yubin.model.Info" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="infoclass" property="infoclass" jdbcType="BIGINT" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="BIGINT" />
+        <result column="fcount" property="fcount" jdbcType="BIGINT" />
+        <result column="rcount" property="rcount" jdbcType="BIGINT" />
+        <result column="time" property="time" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, title, infoclass, img, description, keywords, message, count, fcount, rcount, 
+        time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.yubin.model.Info" >
+        insert into t_info (id, title, infoclass, 
+            img, description, keywords, 
+            message, count, fcount, 
+            rcount, time)
+        values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{infoclass,jdbcType=BIGINT}, 
+            #{img,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+            #{message,jdbcType=VARCHAR}, #{count,jdbcType=BIGINT}, #{fcount,jdbcType=BIGINT}, 
+            #{rcount,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yubin.model.Info" >
+        update t_info
+        <set >
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="infoclass != null" >
+                infoclass = #{infoclass,jdbcType=BIGINT},
+            </if>
+            <if test="img != null" >
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null" >
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null" >
+                count = #{count,jdbcType=BIGINT},
+            </if>
+            <if test="fcount != null" >
+                fcount = #{fcount,jdbcType=BIGINT},
+            </if>
+            <if test="rcount != null" >
+                rcount = #{rcount,jdbcType=BIGINT},
+            </if>
+            <if test="time != null" >
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yubin.dao.PersonalDrugMapper" >
+    <resultMap id="BaseResultMap" type="com.yubin.model.PersonalDrug" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="start" property="start" jdbcType="TIMESTAMP" />
+        <result column="end" property="end" jdbcType="TIMESTAMP" />
+        <result column="rate" property="rate" jdbcType="VARCHAR" />
+        <result column="drug_id" property="drugId" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, user_id, start, end, rate, drug_id
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_personal_drug
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.yubin.model.PersonalDrug" >
+        insert into t_personal_drug (id, user_id, start, 
+            end, rate, drug_id
+            )
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{start,jdbcType=TIMESTAMP}, 
+            #{end,jdbcType=TIMESTAMP}, #{rate,jdbcType=VARCHAR}, #{drugId,jdbcType=BIGINT}
+            )
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yubin.model.PersonalDrug" >
+        update t_personal_drug
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="start != null" >
+                start = #{start,jdbcType=TIMESTAMP},
+            </if>
+            <if test="end != null" >
+                end = #{end,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rate != null" >
+                rate = #{rate,jdbcType=VARCHAR},
+            </if>
+            <if test="drugId != null" >
+                drug_id = #{drugId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_personal_drug
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>
